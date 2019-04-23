@@ -1,0 +1,9 @@
+---
+- name: check HDD size
+  assert:
+    that:
+      - "{{ item.size_total }} > 1265193984"
+    msg: "you DO NOT have enough space on {{ item.mount }} mounted at {{ item.device }}"
+  loop: "{{ ansible_mounts }}"
+  when: item.mount == "/" or item.mount == "/boot"
+  # - mount.size_available > mount.size_total|float * 0.15    for volume with more than 15% free space 

@@ -1,0 +1,24 @@
+---
+- name: check number of cpus
+  vars: 
+    - ansible_processor_vcpus_min: "{{ product_yml }}.processor_vcpus_min"
+  assert:
+    that: 
+      - "{{ ansible_processor_vcpus }} >= {{ ansible_processor_vcpus_min }}"
+    fail_msg: you need more than 1 CPU
+    success_msg: you have 2 or more CPUs
+
+- name: get virtualization CPU feature
+  shell: grep -E 'svm|vmx' /proc/cpuinfo | grep nx
+  register: cpu_nx
+  tags: cpu_features
+
+- name: cpu debug
+  debug:
+    msg: "{{cpu_nx}}"
+
+- name: check virtualization CPU feature
+  debug:
+    msg: cpu contains virtualization cpu_features
+  when: cpu_nx.stdout.find("nx") != 1
+  tags: cpu_features

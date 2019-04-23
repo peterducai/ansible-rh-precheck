@@ -1,0 +1,16 @@
+---
+- name: check NICs
+  assert:
+    that:
+      - "{{ ansible_enp1s0.speed }} >= 1000"
+    msg: "your card is only {{ ansible_enp1s0.speed }} Mbps, but it MUST be at least 1000 Mbps"
+  loop: "{{ ansible_mounts }}"
+  when: item.mount == "/" or item.mount == "/boot"
+
+- name: check BONDing
+  debug:
+    msg: "hellou"
+
+- name: check TEAMing
+  debug:
+    msg: "olla"
