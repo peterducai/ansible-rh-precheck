@@ -47,10 +47,19 @@ Example Playbook
     - name: volume/HDD check
       include: tasks/volume_check.yml
 ```
+or
+
+```
+- hosts: servers
+  roles:
+     - { role: peterducai.ansible-rh-precheck, product_yml: rhvh43 }
+```
 
 and you can run it with
 
-> ansible-playbook your_playbook.yml -u root --extra-vars="product_yml=rhvh43"
+> ansible-playbook your_playbook.yml -u root
+
+
 
 
 License
