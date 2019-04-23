@@ -16,21 +16,42 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```
+product_yml: { rhvh43 | rhvm43 }
+```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+There are no dependencies.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yaml
+- name: check disk
+  hosts: all
+  #strategy: debug
+  handlers:
+    - include: handlers/handlers.yml
+  tasks:
+    - name: gather facts
+      setup:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+    - name: include tresholds
+      include_vars: "{{ product_yml }}.yml"
+
+    - name: cpu check
+      include: tasks/cpu_check.yml
+
+    - name: volume/HDD check
+      include: tasks/volume_check.yml
+```
+
+and you can run it with
+
+> ansible-playbook your_playbook.yml -u root --extra-vars="product_yml=rhvh43"
+
 
 License
 -------

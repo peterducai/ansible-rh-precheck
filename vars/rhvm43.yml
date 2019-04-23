@@ -1,0 +1,6 @@
+rhvm43:
+  processor_vcpus_min: 2
+  memory_total_min: 4294967296
+  hdd_total_min: 25GB # TODO: fix numbers
+  nic_total_min: 1
+  nic_speed_min: 1000
