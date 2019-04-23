@@ -1,7 +1,12 @@
-Role Name
+rh-precheck
 =========
 
-A brief description of the role goes here.
+A role for prechecks for following products
+
+* RHV
+* RHCF
+* RHEL
+  
 
 Requirements
 ------------
@@ -30,7 +35,7 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+Apache License Version 2.0
 
 Author Information
 ------------------
