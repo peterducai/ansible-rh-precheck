@@ -1,2 +1,23 @@
 ---
 # defaults file for rh-precheck
+- name: RedHat prechecks
+  hosts: all
+  #strategy: debug
+  handlers:
+    - include: handlers/handlers.yml
+  tasks:
+    - name: gather facts
+      setup:
+
+    - name: include tresholds
+      include_vars: "{{ product_yml }}.yml"
+
+    - name: cpu check
+      include: tasks/cpu_check.yml
+
+    - name: volume/HDD check
+      include: tasks/volume_check.yml
+
+    # ALWAYS LAST!
+    - name: generate report
+      include: tasks/generate_report.yml

@@ -1,0 +1,6 @@
+<title>{% block title %}{% endblock %}</title>
+<ul>
+{% for host in vars['play_hosts'] %}
+  <li>"{{ host }}"{% if not loop.last %},{% endif %}</li>
+{% endfor %}
+</ul>
