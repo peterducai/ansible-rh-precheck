@@ -1,6 +1,5 @@
-<title>{% block title %}{% endblock %}</title>
-<ul>
+REPORT
+
 {% for host in vars['play_hosts'] %}
-  <li>"{{ host }}"{% if not loop.last %},{% endif %}</li>
+  "{{ host }}"{% if not loop.last %},{% endif %}  {# TODO: array of failed tasks #}
 {% endfor %}
-</ul>

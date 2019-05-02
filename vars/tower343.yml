@@ -1,0 +1,7 @@
+tower:
+  version: "3.4.3"
+  processor_vcpus_min: 2
+  memory_total_min: 4294967296
+  hdd_total_min: 21474836480
+  min_ansible_version: "2.2"
+  min_postgres_version: "9.6"

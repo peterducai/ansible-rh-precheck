@@ -1,7 +1,8 @@
 ---
 - name: generate report
   hosts: localhost
+  connection: local
   template:
     backup: yes
     src: templates/report.j2
-    dest: ~/report_precheck_{{ ansible_date_time.date }}.html
+    dest: ~/report_precheck_{{ ansible_date_time.date }}.txt
