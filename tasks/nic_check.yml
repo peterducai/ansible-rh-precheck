@@ -7,8 +7,8 @@
 - name: check NIC speed  #TODO: check if working
   assert:
     that:
-      - "{{ hostvars[ansible_fqdn]['ansible_'~item]['speed'] }} >= {{ nic_speed_min }}"
-    msg: "your card is only {{ hostvars[ansible_fqdn]['ansible_'~item]['speed'] | pprint }} Mbps, but it MUST be at least {{ nic_speed_min }} Mbps"
+      - "{{ hostvars[ansible_hostname]['ansible_'~item]['speed'] }} >= {{ nic_speed_min }}"
+    msg: "your card is only {{ hostvars[ansible_hostname]['ansible_'~item]['speed'] | pprint }} Mbps, but it MUST be at least {{ nic_speed_min }} Mbps"
   loop: "{{ ansible_interfaces | map('replace', '-','_') | list }}"
 
 - name: check BONDing
