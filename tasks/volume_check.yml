@@ -12,8 +12,10 @@
   shell:
     lvs|awk -F ' '  '{print $3}'|tail -n +2|grep 't\|T\|V'
   register: lvs_comm
+  tags: thinpool
 
 - name: check if thin provisioned
   debug:
     msg: not thinpool
   when: lvs_comm == ""
+  tags: thinpool

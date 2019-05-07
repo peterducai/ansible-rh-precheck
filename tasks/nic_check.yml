@@ -14,3 +14,7 @@
 - name: check TEAMing
   debug:
     msg: "olla"
+
+- name: list NICs (HW only)
+  shell: lspci | grep -i -e ethernet -e network|wc -l
+  register: hw_nic_number
