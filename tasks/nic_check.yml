@@ -16,5 +16,6 @@
     msg: "olla"
 
 - name: list NICs (HW only)
-  shell: lspci | grep -i -e ethernet -e network|wc -l
+  # shell: lspci | grep -i -e ethernet -e network|wc -l  #FEDORA
+  shell: ls -d /sys/class/net/eth* | wc -l
   register: hw_nic_number
