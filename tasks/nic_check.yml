@@ -1,4 +1,8 @@
 ---
+- name: Gather facts about NICs
+  setup:
+    filter: ansible_interfaces
+
 - name: check number of NICs
   # shell: lspci | grep -i -e ethernet -e network|wc -l  #FEDORA
   shell: ls -d /sys/class/net/eth* | wc -l
@@ -23,4 +27,3 @@
     - debug:
       msg: "check teaming"
   when: hw_nic_number > 1
-

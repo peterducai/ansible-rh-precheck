@@ -6,9 +6,6 @@
   handlers:
     - include: ../handlers/handlers.yml
   tasks:
-    - name: gather facts
-      setup:
-
     - name: include tresholds
       include_vars: "{{ product_yml }}.yml"
 
