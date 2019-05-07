@@ -7,3 +7,13 @@
   loop: "{{ ansible_mounts }}"
   when: item.mount == "/" or item.mount == "/boot"
   # - mount.size_available > mount.size_total|float * 0.15    for volume with more than 15% free space 
+
+- name: list thin provisioned #must contain t,T or V in Attr of lvs output
+  shell:
+    lvs|awk -F ' '  '{print $3}'|tail -n +2|grep 't\|T\|V'
+  register: lvs_comm
+
+- name: check if thin provisioned
+  debug:
+    msg: not thinpool
+  when: lvs_comm == ""

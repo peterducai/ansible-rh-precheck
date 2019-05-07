@@ -41,6 +41,10 @@ and you can run it with
 
 ps: for *product_yml* variable, see vars folder and choose one of file (without .yml)
 
+OR
+
+> ansible-playbook your_playbook.yml -u root --extra-vars "product_yml=rhvh43"
+
 
 License
 -------
