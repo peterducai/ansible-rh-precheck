@@ -1,21 +1,26 @@
 ---
-- name: check NICs
-  assert:
-    that:
-      - "{{ ansible_enp1s0.speed }} >= 1000"
-    msg: "your card is only {{ ansible_enp1s0.speed }} Mbps, but it MUST be at least 1000 Mbps"
-  loop: "{{ ansible_mounts }}"
-  when: item.mount == "/" or item.mount == "/boot"
-
-- name: check BONDing
-  debug:
-    msg: "hellou"
-
-- name: check TEAMing
-  debug:
-    msg: "olla"
-
-- name: list NICs (HW only)
+- name: check number of NICs
   # shell: lspci | grep -i -e ethernet -e network|wc -l  #FEDORA
   shell: ls -d /sys/class/net/eth* | wc -l
   register: hw_nic_number
+
+- name: check NIC speed  #TODO: check if working
+  assert:
+    that:
+      - "{{ hostvars[ansible_fqdn]['ansible_'~item]['speed'] }} >= {{ nic_speed_min }}"
+    msg: "your card is only {{ hostvars[ansible_fqdn]['ansible_'~item]['speed'] | pprint }} Mbps, but it MUST be at least {{ nic_speed_min }} Mbps"
+  loop: "{{ ansible_interfaces | map('replace', '-','_') | list }}"
+
+- name: check BONDing
+  block: 
+    - debug:
+        msg: "check bonding"
+  when: hw_nic_number > 1
+  
+
+- name: check TEAMing
+  block:
+    - debug:
+      msg: "check teaming"
+  when: hw_nic_number > 1
+
