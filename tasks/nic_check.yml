@@ -20,6 +20,8 @@
     - debug:
         msg: "check bonding"
   when: hw_nic_number > 1
+  tags:
+    - bonding
   
 
 - name: check TEAMing
@@ -27,3 +29,5 @@
     - debug:
       msg: "check teaming"
   when: hw_nic_number > 1
+  tags: 
+    - teaming

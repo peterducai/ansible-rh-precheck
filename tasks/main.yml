@@ -6,14 +6,14 @@
   handlers:
     - include: ../handlers/handlers.yml
   tasks:
-    - name: include tresholds
+    - name: include product tresholds
       include_vars: "{{ product_yml }}.yml"
 
     - name: cpu check
       include: cpu_check.yml
 
-    - name: volume/HDD check
-      include: volume_check.yml
+    - name: storage check
+      include: storage_check.yml
 
     # ALWAYS LAST!
     - name: generate report
